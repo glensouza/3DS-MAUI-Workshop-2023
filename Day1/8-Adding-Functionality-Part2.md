@@ -6,7 +6,7 @@ Now we can finish up with the visual parts.
 
 Let's start with a slight change to the app shell.
 
-Shell is the default way of defining the page navigation in a .NET MAUI app. The default UI has a navigation menu. Since this app only has a single page, we don't need the navigation menu. There's no other page to navigate to. Let's open up `AppShell.xaml` and add a line to say `Shell.NavBarIsVisible=false`. That one little switch turns off the navigation menu.
+Shell is the default way of defining the page navigation in a .NET MAUI app. The default UI has a navigation menu. Since this app only has a single page, we don't need the navigation menu. There's no other page to navigate to. Let's open up `AppShell.xaml` and add a line to say `Shell.NavBarIsVisible="false"`. That one little switch turns off the navigation menu.
 
 ## UI
 

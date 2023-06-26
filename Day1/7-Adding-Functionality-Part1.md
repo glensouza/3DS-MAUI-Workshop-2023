@@ -27,7 +27,7 @@ In the project, right‑click on the Fonts folder and select Add, then Existing 
 To use the font, we have to register it within the app. We go to MauiProgram.cs, which is where we configure the app for anything special that needs to be done at startup. There is already a ConfigureFonts extension method with two fonts already registered. We add the font with the font name and an alias. We'll use the alias to specify when we want to use the font in our code
 
 ```csharp
-builder.Services.AddFonts(new Font("Kastore", "Kastore"));
+fonts.AddFont("Kastore-Bold.otf", "KastoreBold");
 ```
 
 That is all you have to do to add a custom font that'll be available on each platform.
