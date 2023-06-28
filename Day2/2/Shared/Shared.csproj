@@ -13,4 +13,10 @@
     <PackageReference Include="System.ServiceModel.Syndication" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="carNames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
