@@ -40,13 +40,18 @@ My name is Glen Souza. I'm a Principal Cloud Solution Architect at Microsoft. I'
 
 ### Day 2
 
+- [Create New Solution](Day2/1-Create-New-Solution.md)
+- ***BREAK***
+- [Shared Project](Day2/2-Shared-Project.md)
+- ***BREAK***
+- [PWA Website](3-Website.md)
+
+### Day 3
+
 - Xamarin.Forms Structure
 - Page navigation and controls
 - Data binding
 - Working with data
-
-### Day 3
-
 - Shell
 - Notifications
 - Advanced UI
