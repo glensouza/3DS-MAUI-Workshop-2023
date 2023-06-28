@@ -9,18 +9,14 @@ public class CarNameGenerator : IRandomPictureGenerator
 {
     private readonly HttpClient httpClient;
     private readonly HtmlDocument htmlDoc;
-    private readonly List<string> carNames = new();
+    private readonly List<string> carNames;
     private const string CarDoesNotExistUrl = "https://www.thisautomobiledoesnotexist.com";
 
     public CarNameGenerator()
     {
         this.httpClient = new HttpClient();
         this.htmlDoc = new HtmlDocument();
-        IEnumerable<string> lines = File.ReadLines("carNames.txt");
-        foreach (string line in lines)
-        {
-            this.carNames.Add(line);
-        }
+        this.carNames = Constants.CarNames;
     }
 
     public async Task<RandomPicture> GetRandomPictureAsync()

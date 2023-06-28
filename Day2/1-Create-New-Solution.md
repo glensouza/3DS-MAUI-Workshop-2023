@@ -2,18 +2,6 @@
 
 We will be creating a solution with re-usable code in different projects that will run on multiple platforms. We will be using Visual Studio 2022 for this workshop. You can download it from [here](https://visualstudio.microsoft.com/downloads/).
 
-## Console App to act as test harness
-
-We will be creating a console app to act as a test harness for our code. This will allow us to test our code without having to deploy it to a device or emulator.
-
-1. Open Visual Studio 2022
-1. Select **Create a new project**
-1. Select **Console App (.NET)** from the list of templates
-1. Name the project **TestHarness**
-1. Since it is the first project in the solution, name the Solution **BestPicture**
-1. Make sure the Framework is set to .NET 7.0
-1. Click **Create**
-
 ## Class Library for shared code
 
 1. Right-click on the Solution
@@ -76,6 +64,6 @@ We will be creating a console app to act as a test harness for our code. This wi
 1. Select the **Components** project
 1. Click **OK**
 
-You should have 5 projects in your solution.
+You should have 4 projects in your solution.
 
 [Next: Set up and test the Shared project](2-Shared-Project.md)
