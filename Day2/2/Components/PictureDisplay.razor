@@ -1,0 +1,27 @@
+@using Shared.Models
+<div class="col">
+    <div class="card" style="width: 18rem;">
+        <img src="@picture.PictureUri" class="card-img-top" alt="@picture.Name">
+        <div class="card-body">
+            <h5 class="card-title">@index - @picture.Name (@picture.Rating)</h5>
+            <button class="btn btn-danger" @onclick="DeletePic">Delete</button>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public PictureModel picture { get; set; }
+
+    [Parameter]
+    public int index { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnDelete { get; set; }
+
+    private void DeletePic()
+    {
+        OnDelete.InvokeAsync(index);
+    }
+}

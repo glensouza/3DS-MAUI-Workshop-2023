@@ -1,9 +1,77 @@
 ﻿@page "/"
 
+@*@inject PictureTable pictureTable*@
+
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<PicturesDisplay pictures="pictures" OnDelete="DeletePic" />
 
-Welcome to your new app.
+<button class="btn btn-success" @onclick="async () => await GenerateEntries()">Generate 10 Random Entries</button>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private readonly List<PictureModel> pictures = new();
+    private IStorage blobStorage;
+    private IData<PictureEntity> pictureTable;
+    private const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=3dsdemo20230628;AccountKey=800QuK4RXFmVbYZKf9BMmasMQvaOiOQDB55wSB8ryc8guaP7EpXKP2oVSK1lEOO9/vcJr9Wvx8e++AStEqY9pw==;EndpointSuffix=core.windows.net";
+    private readonly string partitionKey = Constants.OctoTablePartitionKey.ToLower();
+    private IRandomPictureGenerator randomPictureGenerator = new OctoGenerator();
+
+    protected override Task OnInitializedAsync()
+    {
+        try
+        {
+            this.blobStorage = new BlobStorage(ConnectionString);
+            this.pictureTable = new PictureTable(ConnectionString, partitionKey);
+            this.GetAllPics();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private void GetAllPics()
+    {
+        List<PictureEntity> pics = this.pictureTable.GetAll().OrderByDescending(s => s.Rating).ThenBy(s => s.Name).ToList();
+        foreach (PictureEntity pic in pics)
+        {
+            pictures.Add(new PictureModel
+            {
+                Name = pic.Name,
+                Rating = pic.Rating,
+                PicId = pic.RowKey,
+                PictureUri = pic.PictureUri
+            });
+        }
+        StateHasChanged();
+    }
+
+    private async Task DeletePic(int picIndex)
+    {
+        try
+        {
+            await this.pictureTable.DeleteAsync(pictures[picIndex].PicId);
+            this.GetAllPics();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    private async Task GenerateEntries()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            PictureEntity pictureEntity = new();
+            RandomPicture randomPicture = await this.randomPictureGenerator.GetRandomPictureAsync();
+            string picUrl = await this.blobStorage.Save(randomPicture.Base64PNG, $"{pictureEntity.RowKey}.png");
+            pictureEntity.Name = randomPicture.Name;
+            pictureEntity.PictureUri = picUrl;
+            await this.pictureTable.AddAsync(pictureEntity);
+            this.GetAllPics();
+        }
+    }
+}
