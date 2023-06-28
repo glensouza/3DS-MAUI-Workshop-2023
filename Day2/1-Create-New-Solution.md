@@ -79,13 +79,3 @@ We will be creating a console app to act as a test harness for our code. This wi
 You should have 5 projects in your solution.
 
 [Next: Set up and test the Shared project](2-Shared-Project.md)
-## Add a class to the Shared project
-
-1. Right-click on the **Shared** project
-1. Select **Add > New Folder**
-1. Name the folder **Models**
-1. Right-click on the **Models** folder
-1. Select **Add > New Item**
-1. Select **Class** from the list of templates
-1. Name the class **Movie**
-1. Click **Add**
